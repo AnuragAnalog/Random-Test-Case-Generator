@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import os
+import time
 
 try:
     import numpy as np
@@ -24,10 +25,10 @@ def print_matrix(arr: list, r: int, c: int) -> None:
 
     return
 
-def numbers(n: int, mini: int, maxi: int, n_flag: bool =False, dis: bool =False, fh, f_flag: bool =False) -> None:
+def numbers(n: int, mini: int, maxi: int, fh, n_flag: bool =False, dis: bool =False, f_flag: bool =False) -> None:
     if n_flag:
         if f_flag:
-            fh.write(n)
+            fh.write(str(n)+"\n")
         else:
             print(n)
 
@@ -39,28 +40,31 @@ def numbers(n: int, mini: int, maxi: int, n_flag: bool =False, dis: bool =False,
                 val = np.random.randint(mini, maxi+1)
             tmp.append(val)
             if f_flag:
-                fh.write(val)
+                fh.write(str(val))
             else:
                 print(val)
     else:
         for i in range(n):
             if f_flag:
-                fh.write(np.random.randint(mini, maxi+1))
+                fh.write(str(np.random.randint(mini, maxi+1)))
             else:
                 print(np.random.randint(mini, maxi+1))
 
     return
 
-def array(n: int, size: int, mini: int, maxi: int, n_flag: bool =False, size_flag: bool =False, dis: bool =False, fh, f_flag: bool =False) -> None:
+def array(n: int, size: int, mini: int, maxi: int, fh, n_flag: bool =False, size_flag: bool =False, dis: bool =False, f_flag: bool =False) -> None:
     if n_flag:
         if f_flag:
-            fh.write(n)
+            fh.write(str(n)+"\n")
         else:
             print(n)
 
     for i in range(n):
         if size_flag:
-            print(size)
+            if f_flag:
+                fh.write(str(size))
+            else:
+                print(size)
 
         if dis:
             tmp = list()
@@ -71,14 +75,18 @@ def array(n: int, size: int, mini: int, maxi: int, n_flag: bool =False, size_fla
                 tmp.append(val)
             print_array(tmp)
         else:
-            print(np.random.randint(mini, maxi+1, size=size))
+            for j in range(size):
+                if f_flag:
+                    fh.write(str(np.random.randint(mini, maxi+1)))
+                else:
+                    print(np.random.randint(mini, maxi+1))
 
     return
 
-def matrix(n: int, r: int, c: int, mini: int, maxi: int, n_flag: bool =False, nm_flag: bool =False, dis: bool =False, fh, f_flag: bool =False) -> None:
+def matrix(n: int, r: int, c: int, mini: int, maxi: int, fh, n_flag: bool =False, nm_flag: bool =False, dis: bool =False, f_flag: bool =False) -> None:
     if n_flag:
         if f_flag:
-            fh.write(n)
+            fh.write(str(n)+"\n")
         else:
             print(n)
 
@@ -99,10 +107,10 @@ def matrix(n: int, r: int, c: int, mini: int, maxi: int, n_flag: bool =False, nm
 
     return
 
-def string(n: int, size: int, charset: str, n_flag: bool =False, size_flag: bool =False, dis: bool =False, fh, f_flag: bool =False) -> None:
+def string(n: int, size: int, charset: str, fh, n_flag: bool =False, size_flag: bool =False, dis: bool =False, f_flag: bool =False) -> None:
     if n_flag:
         if f_flag:
-            fh.write(n)
+            fh.write(str(n)+"\n")
         else:
             print(n)
 
@@ -125,10 +133,10 @@ def string(n: int, size: int, charset: str, n_flag: bool =False, size_flag: bool
 
     return
 
-def string_matrix(n: int, r: int, c: int, charset: str, n_flag: bool =False, nm_flag: bool =False, dis: bool =False, fh, f_flag: bool =False) -> None:
+def string_matrix(n: int, r: int, c: int, charset: str, fh, n_flag: bool =False, nm_flag: bool =False, dis: bool =False, f_flag: bool =False) -> None:
     if n_flag:
         if f_flag:
-            fh.write(n)
+            fh.write(str(n)+"\n")
         else:
             print(n)
 
@@ -258,8 +266,9 @@ def menu() -> (int, str):
     if opt2 == 1:
         fname = input("Enter your file-name: ")
         if len(fname) == 0:
-            print("File name set to default -> test-cases.txt")
-            fname = "test-cases.txt"
+            epoch = "".join(str(time.time()).split("."))
+            fname = "test-cases-"+epoch+".txt"
+            print("File name set to default ->", fname)
     else:
         fname = None
 
@@ -309,12 +318,12 @@ if __name__ == '__main__':
     opt, fname = menu()
 
     if fname != None:
-        fh = open(fname, "r")
+        fh = open(fname, "w")
         f_flag = True
 
     if opt == 1:
         n, mini, maxi, n_flag, dis = input_data1()
-        numbers(n, mini, maxi, n_flag, dis, fh, f_flag)
+        numbers(n, mini, maxi, fh, n_flag, dis, f_flag)
     elif opt == 2:
         print("! Type of Array !")
         print("1) One-dimensional")
@@ -322,10 +331,10 @@ if __name__ == '__main__':
         choice = int(input("Enter your choice: "))
         if choice == 1:
             n, size, mini, maxi, n_flag, size_flag, dis = input_data2()
-            array(n, size, mini, maxi, n_flag, size_flag, dis, fh, f_flag)
+            array(n, size, mini, maxi, fh, n_flag, size_flag, dis, f_flag)
         elif choice == 2:
             n, r, c, mini, maxi, n_flag, nm_flag, dis = input_data3()
-            matrix(n, r, c, mini, maxi, n_flag, nm_flag, dis, fh, f_flag)
+            matrix(n, r, c, mini, maxi, fh, n_flag, nm_flag, dis, f_flag)
     elif opt == 3:
         print("! Type of Character Arrays !")
         print("1) Strings")
@@ -333,12 +342,13 @@ if __name__ == '__main__':
         choice = int(input("Enter your choice: "))
         if choice == 1:
             n, size, charset, n_flag, size_flag, dis = input_data4()
-            string(n, size, charset, n_flag, size_flag, dis, fh, f_flag)
+            string(n, size, charset, fh, n_flag, size_flag, dis, f_flag)
         elif choice == 2:
             n, r, c, charset, n_flag, nm_flag, dis = input_data5()
-            string_matrix(n, r, c, charset, n_flag, nm_flag, dis, fh, f_flag)
+            string_matrix(n, r, c, charset, fh, n_flag, nm_flag, dis, f_flag)
     else:
         fh.close()
         print("Thank You, Hope to see you soon :-D")
         sys.quit()
+    fh.write("\n")
     fh.close()
