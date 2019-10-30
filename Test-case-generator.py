@@ -43,6 +43,11 @@ def numbers(n: int, mini: int, maxi: int, fh, n_flag: bool =False, dis: bool =Fa
         else:
             print(n)
 
+    if dis and maxi - mini < n:
+        print("With the given parameters generating randomness is not possible")
+        print("Range of integers is less than n (maxi - mini < n)")
+        quit()
+
     if dis:
         tmp = list()
         for i in range(n):
@@ -69,6 +74,11 @@ def array(n: int, size: int, mini: int, maxi: int, fh, n_flag: bool =False, size
             fh.write(str(n)+"\n")
         else:
             print(n)
+
+    if dis and maxi - mini < size:
+        print("With the given parameters generating randomness is not possible")
+        print("Range of integers is less than size of array (maxi-mini < size)")
+        quit()
 
     for i in range(n):
         if size_flag:
@@ -102,6 +112,11 @@ def matrix(n: int, r: int, c: int, mini: int, maxi: int, fh, n_flag: bool =False
         else:
             print(n)
 
+    if dis and maxi - mini < r*c:
+        print("With the given parameters generating randomness is not possible")
+        print("Range of integers is less than the cells of array (maxi-mini < size)")
+        quit()
+
     for i in range(n):
         if nm_flag:
             if f_flag:
@@ -128,6 +143,11 @@ def string(n: int, size: int, charset: str, fh, n_flag: bool =False, size_flag: 
             fh.write(str(n)+"\n")
         else:
             print(n)
+
+    if dis and size > len(set(charset)):
+        print("With the given parameters generating randomness is not possible")
+        print("Size of string > character set(distinct)")
+        quit()
 
     for i in range(n):
         if size_flag:
@@ -160,6 +180,11 @@ def string_matrix(n: int, r: int, c: int, charset: str, fh, n_flag: bool =False,
             fh.write(str(n)+"\n")
         else:
             print(n)
+
+    if dis and r*c > len(set(charset)):
+        print("With the given parameters generating randomness is not possible")
+        print("Size of string > character set(distinct)")
+        quit()
 
     for i in range(n):
         if nm_flag:
