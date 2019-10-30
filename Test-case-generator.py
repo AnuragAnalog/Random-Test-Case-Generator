@@ -147,7 +147,10 @@ def string(n: int, size: int, charset: str, fh, n_flag: bool =False, size_flag: 
             for j in range(size):
                 ind = np.random.randint(0, len(charset))
                 rand_str = rand_str + charset[ind]
-        print(rand_str)
+        if f_flag:
+            fh.write(rand_str+"\n")
+        else:
+            print(rand_str)
 
     return
 
@@ -176,7 +179,7 @@ def string_matrix(n: int, r: int, c: int, charset: str, fh, n_flag: bool =False,
             for j in range(r*c):
                 ind = np.random.randint(0, len(charset))
                 rand_str = rand_str + charset[ind]
-        print_matrix(list(rand_str), r, c)
+        print_matrix(list(rand_str), r, c, fh, f_flag)
 
     return
 
