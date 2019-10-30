@@ -298,44 +298,39 @@ def menu() -> (int, str):
 
     return opt1, fname
 
-def input_data1() -> (int, int, int, bool, bool):
-    n, n_flag = input_N()
+def input_data1() -> (int, int, bool):
     mini, maxi = input_min_max()
     dis = input_distinct()
 
-    return (n, mini, maxi, n_flag, dis)
+    return (mini, maxi, dis)
 
-def input_data2() -> (int, int, int, int, bool, bool, bool):
-    n, n_flag = input_N()
+def input_data2() -> (int, int, int, bool, bool):
     mini, maxi = input_min_max()
     size, size_flag = input_array()
     dis = input_distinct()
 
-    return (n, size, mini, maxi, n_flag, size_flag, dis)
+    return (size, mini, maxi, size_flag, dis)
 
-def input_data3() -> (int, int, int, int, int, bool, bool, bool):
-    n, n_flag = input_N()
+def input_data3() -> (int, int, int, int, bool, bool):
     mini, maxi = input_min_max()
     r, c, nm_flag = input_array_dimension()
     dis = input_distinct()
 
-    return (n, r, c, mini, maxi, n_flag, nm_flag, dis)
+    return (r, c, mini, maxi, nm_flag, dis)
 
-def input_data4() -> (int, int, str, bool, bool, bool):
-    n, n_flag = input_N()
+def input_data4() -> (int, str, bool, bool):
     size, size_flag = input_array()
     charset = input_charset()
     dis = input_distinct()
 
-    return (n, size, charset, n_flag, size_flag, dis)
+    return (size, charset, size_flag, dis)
 
-def input_data5() -> (int, int, int, str, bool, bool, bool):
-    n, n_flag = input_N()
+def input_data5() -> (int, int, str, bool, bool):
     r, c, nm_flag = input_array_dimension()
     charset = input_charset()
     dis = input_distinct()
 
-    return (n, r, c, charset, n_flag, nm_flag, dis)
+    return (r, c, charset, nm_flag, dis)
 
 if __name__ == '__main__':
     opt, fname = menu()
@@ -347,8 +342,9 @@ if __name__ == '__main__':
         fh = None
         f_flag = False
 
+    n, n_flag = input_N()
     if opt == 1:
-        n, mini, maxi, n_flag, dis = input_data1()
+        mini, maxi, dis = input_data1()
         numbers(n, mini, maxi, fh, n_flag, dis, f_flag)
     elif opt == 2:
         print("! Type of Array !")
@@ -356,10 +352,10 @@ if __name__ == '__main__':
         print("2) Multi-dimensional")
         choice = int(input("Enter your choice: "))
         if choice == 1:
-            n, size, mini, maxi, n_flag, size_flag, dis = input_data2()
+            size, mini, maxi, size_flag, dis = input_data2()
             array(n, size, mini, maxi, fh, n_flag, size_flag, dis, f_flag)
         elif choice == 2:
-            n, r, c, mini, maxi, n_flag, nm_flag, dis = input_data3()
+            r, c, mini, maxi, nm_flag, dis = input_data3()
             matrix(n, r, c, mini, maxi, fh, n_flag, nm_flag, dis, f_flag)
     elif opt == 3:
         print("! Type of Character Arrays !")
@@ -367,10 +363,10 @@ if __name__ == '__main__':
         print("2) Character Array(Multi-dimensional)")
         choice = int(input("Enter your choice: "))
         if choice == 1:
-            n, size, charset, n_flag, size_flag, dis = input_data4()
+            size, charset, size_flag, dis = input_data4()
             string(n, size, charset, fh, n_flag, size_flag, dis, f_flag)
         elif choice == 2:
-            n, r, c, charset, n_flag, nm_flag, dis = input_data5()
+            r, c, charset, nm_flag, dis = input_data5()
             string_matrix(n, r, c, charset, fh, n_flag, nm_flag, dis, f_flag)
     else:
         fh.close()
