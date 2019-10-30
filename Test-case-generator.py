@@ -21,12 +21,18 @@ def print_array(arr: list, fh, f_flag: bool =False) -> None:
 
     return
 
-def print_matrix(arr: list, r: int, c: int) -> None:
+def print_matrix(arr: list, r: int, c: int, fh, f_flag: bool) -> None:
     tmp = np.array(arr).reshape(r, c)
     for i in range(r):
         for j in range(c):
-            print(tmp[i][j], end=" ")
-        print()
+            if f_flag:
+                fh.write(str(tmp[i][j])+" ")
+            else:
+                print(tmp[i][j], end=" ")
+        if f_flag:
+            fh.write("\n")
+        else:
+            print()
 
     return
 
@@ -98,7 +104,10 @@ def matrix(n: int, r: int, c: int, mini: int, maxi: int, fh, n_flag: bool =False
 
     for i in range(n):
         if nm_flag:
-            print(r, c)
+            if f_flag:
+                fh.write(str(r)+" "+str(c)+"\n")
+            else:
+                print(r, c)
 
         if dis:
             tmp = list()
@@ -107,9 +116,9 @@ def matrix(n: int, r: int, c: int, mini: int, maxi: int, fh, n_flag: bool =False
                 while val in tmp:
                     val = np.random.randint(mini, maxi+1)
                 tmp.append(val)
-            print_matrix(tmp, r, c)
+            print_matrix(tmp, r, c, fh, f_flag)
         else:
-            print(np.random.randint(mini, maxi+1, size=r*c).reshape(r, c))
+            print_matrix(np.random.randint(mini, maxi+1, size=r*c), r, c, fh, f_flag)
 
     return
 
@@ -122,7 +131,10 @@ def string(n: int, size: int, charset: str, fh, n_flag: bool =False, size_flag: 
 
     for i in range(n):
         if size_flag:
-            print(size)
+            if f_flag:
+                fh.write(str(size)+"\n")
+            else:
+                print(size)
 
         rand_str = ""        
         if dis:
@@ -148,7 +160,10 @@ def string_matrix(n: int, r: int, c: int, charset: str, fh, n_flag: bool =False,
 
     for i in range(n):
         if nm_flag:
-            print(r, c)
+            if f_flag:
+                fh.write(str(r)+" "+str(c)+"\n")
+            else:
+                print(r, c)
 
         rand_str = ""
         if dis:
