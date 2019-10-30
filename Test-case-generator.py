@@ -9,10 +9,15 @@ except:
     print("You don't have numpy package, first install it.")
     os.system("sudo pip3 install numpy")
 
-def print_array(arr: list) -> None:
-    for e in arr:
-        print(e, end=" ")
-    print()
+def print_array(arr: list, fh, f_flag: bool =False) -> None:
+    if f_flag:
+        for e in arr:
+            fh.write(str(e)+" ")
+        fh.write("\n")
+    else:
+        for e in arr:
+            print(e, end=" ")
+        print()
 
     return
 
@@ -46,7 +51,7 @@ def numbers(n: int, mini: int, maxi: int, fh, n_flag: bool =False, dis: bool =Fa
     else:
         for i in range(n):
             if f_flag:
-                fh.write(str(np.random.randint(mini, maxi+1)))
+                fh.write(str(np.random.randint(mini, maxi+1))+"\n")
             else:
                 print(np.random.randint(mini, maxi+1))
 
@@ -62,7 +67,7 @@ def array(n: int, size: int, mini: int, maxi: int, fh, n_flag: bool =False, size
     for i in range(n):
         if size_flag:
             if f_flag:
-                fh.write(str(size))
+                fh.write(str(size)+"\n")
             else:
                 print(size)
 
@@ -73,13 +78,14 @@ def array(n: int, size: int, mini: int, maxi: int, fh, n_flag: bool =False, size
                 while val in tmp:
                     val = np.random.randint(mini, maxi+1)
                 tmp.append(val)
-            print_array(tmp)
+            print_array(tmp, fh, f_flag)
         else:
             for j in range(size):
                 if f_flag:
-                    fh.write(str(np.random.randint(mini, maxi+1)))
+                    fh.write(str(np.random.randint(mini, maxi+1))+" ")
                 else:
                     print(np.random.randint(mini, maxi+1))
+        print("\n")
 
     return
 
@@ -314,12 +320,14 @@ def input_data5() -> (int, int, int, str, bool, bool, bool):
     return (n, r, c, charset, n_flag, nm_flag, dis)
 
 if __name__ == '__main__':
-    f_flag = False
     opt, fname = menu()
 
     if fname != None:
         fh = open(fname, "w")
         f_flag = True
+    else:
+        fh = None
+        f_flag = False
 
     if opt == 1:
         n, mini, maxi, n_flag, dis = input_data1()
@@ -350,5 +358,7 @@ if __name__ == '__main__':
         fh.close()
         print("Thank You, Hope to see you soon :-D")
         sys.quit()
-    fh.write("\n")
-    fh.close()
+    
+    if fh != None:
+        fh.write("\n")
+        fh.close()
