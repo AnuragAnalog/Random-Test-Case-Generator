@@ -37,16 +37,18 @@ def print_matrix(arr: list, r: int, c: int, fh, f_flag: bool) -> None:
     return
 
 def numbers(n: int, mini: int, maxi: int, fh, n_flag: bool =False, dis: bool =False, f_flag: bool =False) -> None:
+    if dis and maxi - mini < n:
+        print("With the given parameters generating randomness is not possible")
+        print("Range of integers is less than n (maxi - mini < n)")
+        finally_block(fh)
+        os.remove(fh.name)
+        quit()
+
     if n_flag:
         if f_flag:
             fh.write(str(n)+"\n")
         else:
             print(n)
-
-    if dis and maxi - mini < n:
-        print("With the given parameters generating randomness is not possible")
-        print("Range of integers is less than n (maxi - mini < n)")
-        quit()
 
     if dis:
         tmp = list()
@@ -69,16 +71,18 @@ def numbers(n: int, mini: int, maxi: int, fh, n_flag: bool =False, dis: bool =Fa
     return
 
 def array(n: int, size: int, mini: int, maxi: int, fh, n_flag: bool =False, size_flag: bool =False, dis: bool =False, f_flag: bool =False) -> None:
+    if dis and maxi - mini < size:
+        print("With the given parameters generating randomness is not possible")
+        print("Range of integers is less than size of array (maxi-mini < size)")
+        finally_block(fh)
+        os.remove(fh.name)
+        quit()
+
     if n_flag:
         if f_flag:
             fh.write(str(n)+"\n")
         else:
             print(n)
-
-    if dis and maxi - mini < size:
-        print("With the given parameters generating randomness is not possible")
-        print("Range of integers is less than size of array (maxi-mini < size)")
-        quit()
 
     for i in range(n):
         if size_flag:
@@ -106,16 +110,18 @@ def array(n: int, size: int, mini: int, maxi: int, fh, n_flag: bool =False, size
     return
 
 def matrix(n: int, r: int, c: int, mini: int, maxi: int, fh, n_flag: bool =False, nm_flag: bool =False, dis: bool =False, f_flag: bool =False) -> None:
+    if dis and maxi - mini < r*c:
+        print("With the given parameters generating randomness is not possible")
+        print("Range of integers is less than the cells of array (maxi-mini < size)")
+        finally_block(fh)
+        os.remove(fh.name)
+        quit()
+
     if n_flag:
         if f_flag:
             fh.write(str(n)+"\n")
         else:
             print(n)
-
-    if dis and maxi - mini < r*c:
-        print("With the given parameters generating randomness is not possible")
-        print("Range of integers is less than the cells of array (maxi-mini < size)")
-        quit()
 
     for i in range(n):
         if nm_flag:
@@ -138,16 +144,18 @@ def matrix(n: int, r: int, c: int, mini: int, maxi: int, fh, n_flag: bool =False
     return
 
 def string(n: int, size: int, charset: str, fh, n_flag: bool =False, size_flag: bool =False, dis: bool =False, f_flag: bool =False) -> None:
+    if dis and size > len(set(charset)):
+        print("With the given parameters generating randomness is not possible")
+        print("Size of string > character set(distinct)")
+        finally_block(fh)
+        os.remove(fh.name)
+        quit()
+
     if n_flag:
         if f_flag:
             fh.write(str(n)+"\n")
         else:
             print(n)
-
-    if dis and size > len(set(charset)):
-        print("With the given parameters generating randomness is not possible")
-        print("Size of string > character set(distinct)")
-        quit()
 
     for i in range(n):
         if size_flag:
@@ -175,16 +183,18 @@ def string(n: int, size: int, charset: str, fh, n_flag: bool =False, size_flag: 
     return
 
 def string_matrix(n: int, r: int, c: int, charset: str, fh, n_flag: bool =False, nm_flag: bool =False, dis: bool =False, f_flag: bool =False) -> None:
+    if dis and r*c > len(set(charset)):
+        print("With the given parameters generating randomness is not possible")
+        print("Cells of array > character set(distinct)")
+        finally_block(fh)
+        os.remove(fh.name)
+        quit()
+
     if n_flag:
         if f_flag:
             fh.write(str(n)+"\n")
         else:
             print(n)
-
-    if dis and r*c > len(set(charset)):
-        print("With the given parameters generating randomness is not possible")
-        print("Size of string > character set(distinct)")
-        quit()
 
     for i in range(n):
         if nm_flag:
@@ -357,6 +367,10 @@ def input_data5() -> (int, int, str, bool, bool):
 
     return (r, c, charset, nm_flag, dis)
 
+def finally_block(fh) -> None:
+    if fh != None:
+        fh.close()
+
 if __name__ == '__main__':
     opt, fname = menu()
 
@@ -397,7 +411,3 @@ if __name__ == '__main__':
         fh.close()
         print("Thank You, Hope to see you soon :-D")
         sys.quit()
-    
-    if fh != None:
-        fh.write("\n")
-        fh.close()
