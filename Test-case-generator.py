@@ -6,7 +6,7 @@ import time
 try:
     import numpy as np
 except:
-    print("You don't have numpy package, first install it.")
+    print("You don't have numpy package. \nInstalling...")
     os.system("sudo pip3 install numpy")
 
 def print_array(arr: list, fh, f_flag: bool =False) -> None:
@@ -299,7 +299,7 @@ def input_charset() -> str:
     return charset
 
 def input_distinct() -> bool:
-    print("Distinct Flag")
+    print("Distinct Flag\n")
     print("1) Yeah")
     print("2) Naah!")
     opt = int(input("Enter your choice: "))
@@ -315,7 +315,7 @@ def menu() -> (int, str):
     print("1) Number")
     print("2) Array")
     print("3) Characters")
-    print("Any-Key) Exit")
+    print("Any-Key - Exit")
     opt1 = int(input("Enter your option: "))
 
     print("Should I Write it into a file?")
