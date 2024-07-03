@@ -35,6 +35,13 @@ def main():
     elif option == 'Floats':
         round_val = st.sidebar.number_input("Round Value", min_value=1, max_value=6, step=1)
         generate_floats(round_val)
+    elif option == 'Characters':
+        lower = st.sidebar.checkbox('Include lowercase characters', value=True)
+        upper = st.sidebar.checkbox('Include uppercase characters', value=False)
+        digits = st.sidebar.checkbox('Include digits', value=False)
+        special = st.sidebar.checkbox('Include special characters', value=False)
+
+        generate_characters(lower=lower, upper=upper, digits=digits, special=special)
 
 def generate_integers():
     option = st.selectbox(
@@ -87,6 +94,37 @@ def generate_floats(round_val):
         num_cols = st.number_input('Number of columns:', min_value=1, step=1)
         if st.button('Generate'):
             st.code(generate_random_floats_2d_range(start_range, end_range, num_rows, num_cols, round_val))
+
+def generate_characters(lower, upper, digits, special):
+    character_set = ''
+    if lower:
+        character_set += 'abcdefghijklmnopqrstuvwxyz'
+    if upper:
+        character_set += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    if digits:
+        character_set += '0123456789'
+    if special:
+        character_set += '!@#$%^&*()'
+
+    if character_set == '':
+        st.warning('Please select atleast one character set')
+        return
+
+    option = st.selectbox(
+        'Choose the type of testcase to generate:',
+        ('Random characters in 1D Array', 'Random characters in 2D Array')
+    )
+
+    if option == 'Random characters in 1D Array':
+        num_chars = st.number_input('Number of characters to generate:', min_value=1, step=1)
+        if st.button('Generate'):
+            st.code(''.join(np.random.choice(list(character_set), num_chars)))
+
+    elif option == 'Random characters in 2D Array':
+        num_rows = st.number_input('Number of rows:', min_value=1, step=1)
+        num_cols = st.number_input('Number of columns:', min_value=1, step=1)
+        if st.button('Generate'):
+            st.code([np.random.choice(list(character_set), num_cols).tolist() for _ in range(num_rows)])
 
 if __name__ == '__main__':
     main()
