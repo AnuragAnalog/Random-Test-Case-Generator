@@ -1,11 +1,13 @@
 # Random Test Case Generator
 
-Generates Random Testcases to test your program while doing your online competitive programming.
+Generates Random Testcases to test your program while doing your online competitive programming like LeetCode, Codeforces, CodeChef etc.
 
-**Domains**
+## Features
 
-* Numbers
+- Generate Random Testcases integers.
 
-* Arrays
+- Generate Random Testcases integers within a range.
 
-* Characters
+- Generate Random Testcases integers within a range(one dimensional).
+
+- Generate Random Testcases integers within a range(two dimensional).
