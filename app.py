@@ -20,20 +20,11 @@ def main():
     if option == 'Integers':
         generate_integers()
     elif option == 'Floats':
-        round_val = st.sidebar.number_input("Round Value", min_value=1, max_value=6, step=1)
-        generate_floats(round_val)
+        generate_floats()
     elif option == 'Characters':
-        lower = st.sidebar.checkbox('Include lowercase characters', value=True)
-        upper = st.sidebar.checkbox('Include uppercase characters', value=False)
-        digits = st.sidebar.checkbox('Include digits', value=False)
-        special = st.sidebar.checkbox('Include special characters', value=False)
-        is_string = st.sidebar.checkbox('Generate as string', value=False)
-
-        generate_characters(lower=lower, upper=upper, digits=digits, special=special, is_string=is_string)
+        generate_characters()
     elif option == 'Booleans':
-        binarise = st.sidebar.checkbox('Binarise the output', value=False)
-
-        generate_booleans(binarise=binarise)
+        generate_booleans()
 
 if __name__ == '__main__':
     main()

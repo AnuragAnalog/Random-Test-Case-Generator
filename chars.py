@@ -1,9 +1,11 @@
 import numpy as np
 import streamlit as st
 
+from utils import char_sidebar_options
 from columize import columize_grid, columize_options
 
-def generate_characters(lower, upper, digits, special, is_string):
+def generate_characters():
+    lower, upper, digits, special, is_string = char_sidebar_options()
     character_set = ''
     if lower:
         character_set += 'abcdefghijklmnopqrstuvwxyz'
