@@ -17,18 +17,21 @@ def generate_integers():
         'Choose the type of testcase to generate:',
         ('Random integers', 'Random integers within a range', '2D Random integers within a range')
     )
+    n = st.number_input('Number of Test Cases of generate', min_value=1, step=1)
 
     if option == 'Random integers':
         num_integers = st.number_input('Max Value:(Minimum value is always 0)', min_value=0, value=10, step=1)
         if st.button('Generate'):
-            st.code(generate_random_integers(num_integers))
+            for _ in range(n):
+                st.code(generate_random_integers(num_integers))
 
     elif option == 'Random integers within a range':
         start_range = st.number_input('Start of range:', step=1)
         end_range = st.number_input('End of range:', step=1)
         num_integers = st.number_input('Number of integers to generate:', min_value=1, step=1)
         if st.button('Generate'):
-            st.code(generate_random_integers_range(start_range, end_range, num_integers))
+            for _ in range(n):
+                st.code(generate_random_integers_range(start_range, end_range, num_integers))
 
     elif option == '2D Random integers within a range':
         start_range = st.number_input('Start of range:', step=1)
@@ -36,4 +39,5 @@ def generate_integers():
         num_rows = st.number_input('Number of rows:', min_value=1, step=1)
         num_cols = st.number_input('Number of columns:', min_value=1, step=1)
         if st.button('Generate'):
-            st.code(generate_random_integers_2d_range(start_range, end_range, num_rows, num_cols))
+            for _ in range(n):
+                st.code(generate_random_integers_2d_range(start_range, end_range, num_rows, num_cols))

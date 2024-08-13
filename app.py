@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 
-import numpy as np
 import streamlit as st
 
 from integer import generate_integers
 from floats import generate_floats
+from chars import generate_characters
 
+st.set_page_config(page_title='Random Testcase Generator', layout='wide')
 st.title('Random Testcase Generator')
 
 def main():
@@ -25,8 +26,9 @@ def main():
         upper = st.sidebar.checkbox('Include uppercase characters', value=False)
         digits = st.sidebar.checkbox('Include digits', value=False)
         special = st.sidebar.checkbox('Include special characters', value=False)
+        is_string = st.sidebar.checkbox('Generate as string', value=False)
 
-        generate_characters(lower=lower, upper=upper, digits=digits, special=special)
+        generate_characters(lower=lower, upper=upper, digits=digits, special=special, is_string=is_string)
 
 if __name__ == '__main__':
     main()
