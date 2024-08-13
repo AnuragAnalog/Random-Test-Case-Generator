@@ -1,6 +1,8 @@
 import numpy as np
 import streamlit as st
 
+from columize import columize_range, columize_options
+
 def generate_characters(lower, upper, digits, special, is_string):
     character_set = ''
     if lower:
@@ -12,11 +14,7 @@ def generate_characters(lower, upper, digits, special, is_string):
     if special:
         character_set += '!@#$%^&*()'
 
-    option = st.selectbox(
-        'Choose the type of testcase to generate:',
-        ('Random characters in 1D Array', 'Random characters in 2D Array')
-    )
-    n = st.number_input('Number of Test Cases of generate', min_value=1, step=1)
+    option, n = columize_options('characters')
 
     if character_set == '':
         st.warning('Please select atleast one character set from the sidebar')
@@ -34,8 +32,7 @@ def generate_characters(lower, upper, digits, special, is_string):
             st.warning('Instead of this option, you can use Integer option to generate random integers')
 
     elif option == 'Random characters in 2D Array':
-        num_rows = st.number_input('Number of rows:', min_value=1, step=1)
-        num_cols = st.number_input('Number of columns:', min_value=1, step=1)
+        num_rows, num_cols = columize_range(1)
         if st.button('Generate'):
             for _ in range(n):
                 if is_string:
