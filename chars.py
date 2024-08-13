@@ -1,7 +1,7 @@
 import numpy as np
 import streamlit as st
 
-from columize import columize_range, columize_options
+from columize import columize_grid, columize_options
 
 def generate_characters(lower, upper, digits, special, is_string):
     character_set = ''
@@ -25,14 +25,14 @@ def generate_characters(lower, upper, digits, special, is_string):
         if st.button('Generate'):
             for _ in range(n):
                 if is_string:
-                    st.code(''.join(np.random.choice(list(character_set), num_chars).tolist()))
+                    st.code("\""+''.join(np.random.choice(list(character_set), num_chars).tolist())+"\"")
                 else:
                     st.code(np.random.choice(list(character_set), num_chars).tolist())
         if digits and any((lower, upper, special)) is False:
             st.warning('Instead of this option, you can use Integer option to generate random integers')
 
     elif option == 'Random characters in 2D Array':
-        num_rows, num_cols = columize_range(1)
+        num_rows, num_cols = columize_grid(1)
         if st.button('Generate'):
             for _ in range(n):
                 if is_string:

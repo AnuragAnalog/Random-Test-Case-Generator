@@ -13,7 +13,7 @@ st.title('Random Testcase Generator')
 def main():
     st.sidebar.title('Select the DataType')
     option = st.sidebar.selectbox(
-        'Choose the type of testcase to generate:',
+        'Select the data type of testcase:',
         ("Integers", "Floats", "Characters", "Booleans")
     )
 
