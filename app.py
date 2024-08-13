@@ -5,6 +5,7 @@ import streamlit as st
 from integer import generate_integers
 from floats import generate_floats
 from chars import generate_characters
+from booleans import generate_booleans
 
 st.set_page_config(page_title='Random Testcase Generator', layout='wide')
 st.title('Random Testcase Generator')
@@ -29,6 +30,10 @@ def main():
         is_string = st.sidebar.checkbox('Generate as string', value=False)
 
         generate_characters(lower=lower, upper=upper, digits=digits, special=special, is_string=is_string)
+    elif option == 'Booleans':
+        binarise = st.sidebar.checkbox('Binarise the output', value=False)
+
+        generate_booleans(binarise=binarise)
 
 if __name__ == '__main__':
     main()
