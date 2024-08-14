@@ -36,6 +36,15 @@ def columize_grid(step):
 
     return num_rows, num_cols
 
+def columize_min_max(min, max, step):
+    col1, col2 = st.columns(2)
+    with col1:
+        min_val = st.number_input('Minimum value:', step=step, value=min)
+    with col2:
+        max_val = st.number_input('Maximum value:', step=step, value=max)
+
+    return min_val, max_val
+
 def columize_range_and_grid(range_step, grid_step):
     col1, col2, col3, col4 = st.columns(4)
     with col1:

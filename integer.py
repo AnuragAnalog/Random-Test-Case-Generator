@@ -3,7 +3,7 @@
 import numpy as np
 import streamlit as st
 
-from columize import columize_range, columize_range_and_grid, columize_options
+from columize import columize_range, columize_range_and_grid, columize_options, columize_min_max
 
 class GenerateIntegers():
     def __init__(self, distinct=None, sort=None) -> None:
@@ -14,8 +14,8 @@ class GenerateIntegers():
         for key, value in kwargs.items():
             setattr(self, key, value)
 
-    def generate_random_integers(self, max_value):
-        return np.random.randint(0, max_value, 1)[0]
+    def generate_random_integers(self, min_value, max_value):
+        return np.random.randint(min_value, max_value, 1)[0]
     
     def generate_random_integers_range(self, start, end, num_integers):
         if self.sort:
@@ -32,10 +32,10 @@ def generate_integers():
     gen_int = GenerateIntegers()
 
     if option == 'Random integers':
-        num_integers = st.number_input('Max Value:(Minimum value is always 0)', min_value=0, value=10, step=1)
+        min_value, max_value = columize_min_max(0, 10, 1)
         if st.button('Generate'):
             for _ in range(n):
-                st.code(gen_int.generate_random_integers(num_integers))
+                st.code(gen_int.generate_random_integers(min_value, max_value))
 
     elif option == 'Random integers within a range':
         start_range, end_range = columize_range(1)

@@ -2,7 +2,7 @@ import numpy as np
 import streamlit as st
 
 from utils import float_sidebar_options
-from columize import columize_range, columize_options, columize_range_and_grid
+from columize import columize_range, columize_options, columize_range_and_grid, columize_min_max
 
 class GenerateFloats():
     def __init__(self, sort=None) -> None:
@@ -12,8 +12,8 @@ class GenerateFloats():
         for key, value in kwargs.items():
             setattr(self, key, value)
 
-    def generate_random_floats(self, max_value, round_val):
-        return round(np.random.uniform(0, max_value, 1)[0], round_val)
+    def generate_random_floats(self, min_value, max_value, round_val):
+        return round(np.random.uniform(min_value, max_value, 1)[0], round_val)
     
     def generate_random_floats_range(self, start, end, num_floats, round_val):
         if self.sort:
@@ -31,10 +31,10 @@ def generate_floats():
     gen_float = GenerateFloats()
 
     if option == 'Random floats':
-        num_floats = st.number_input('Max Value:(Minimum value is always 0)', min_value=0.0, value=10.0, step=0.1)
+        min_value, max_value = columize_min_max(0.0, 10.0, 0.1)
         if st.button('Generate'):
             for _ in range(n):
-                st.code(gen_float.generate_random_floats(num_floats, round_val))
+                st.code(gen_float.generate_random_floats(min_value, max_value, round_val))
 
     elif option == 'Random floats within a range':
         start_range, end_range = columize_range(0.1)
