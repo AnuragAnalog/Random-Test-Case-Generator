@@ -15,7 +15,7 @@ class GenerateCharacters():
 
     def generate_random_characters(self, num_chars):
         if self.is_string:
-            "\""+''.join(np.random.choice(list(self.character_set), num_chars).tolist())+"\""
+            return "\""+''.join(np.random.choice(list(self.character_set), num_chars).tolist())+"\""
         return np.random.choice(list(self.character_set), num_chars).tolist()
     
     def generate_random_characters_2d(self, num_rows, num_cols):
