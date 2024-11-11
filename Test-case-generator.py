@@ -9,10 +9,11 @@ except:
     print("You don't have numpy package. \nInstalling...")
     os.system("sudo pip3 install numpy")
 
-def print_array(arr: list, fh, f_flag: bool =False) -> None:
+
+def print_array(arr: list, fh, f_flag: bool = False) -> None:
     if f_flag:
         for e in arr:
-            fh.write(str(e)+" ")
+            fh.write(str(e) + " ")
         fh.write("\n")
     else:
         for e in arr:
@@ -21,12 +22,13 @@ def print_array(arr: list, fh, f_flag: bool =False) -> None:
 
     return
 
+
 def print_matrix(arr: list, r: int, c: int, fh, f_flag: bool) -> None:
     tmp = np.array(arr).reshape(r, c)
     for i in range(r):
         for j in range(c):
             if f_flag:
-                fh.write(str(tmp[i][j])+" ")
+                fh.write(str(tmp[i][j]) + " ")
             else:
                 print(tmp[i][j], end=" ")
         if f_flag:
@@ -36,7 +38,16 @@ def print_matrix(arr: list, r: int, c: int, fh, f_flag: bool) -> None:
 
     return
 
-def numbers(n: int, mini: int, maxi: int, fh, n_flag: bool =False, dis: bool =False, f_flag: bool =False) -> None:
+
+def numbers(
+    n: int,
+    mini: int,
+    maxi: int,
+    fh,
+    n_flag: bool = False,
+    dis: bool = False,
+    f_flag: bool = False,
+) -> None:
     if dis and maxi - mini < n:
         print("With the given parameters generating randomness is not possible")
         print("Range of integers is less than n (maxi - mini < n)")
@@ -46,16 +57,16 @@ def numbers(n: int, mini: int, maxi: int, fh, n_flag: bool =False, dis: bool =Fa
 
     if n_flag:
         if f_flag:
-            fh.write(str(n)+"\n")
+            fh.write(str(n) + "\n")
         else:
             print(n)
 
     if dis:
         tmp = list()
         for i in range(n):
-            val = np.random.randint(mini, maxi+1)
+            val = np.random.randint(mini, maxi + 1)
             while val in tmp:
-                val = np.random.randint(mini, maxi+1)
+                val = np.random.randint(mini, maxi + 1)
             tmp.append(val)
             if f_flag:
                 fh.write(str(val))
@@ -64,13 +75,24 @@ def numbers(n: int, mini: int, maxi: int, fh, n_flag: bool =False, dis: bool =Fa
     else:
         for i in range(n):
             if f_flag:
-                fh.write(str(np.random.randint(mini, maxi+1))+"\n")
+                fh.write(str(np.random.randint(mini, maxi + 1)) + "\n")
             else:
-                print(np.random.randint(mini, maxi+1))
+                print(np.random.randint(mini, maxi + 1))
 
     return
 
-def array(n: int, size: int, mini: int, maxi: int, fh, n_flag: bool =False, size_flag: bool =False, dis: bool =False, f_flag: bool =False) -> None:
+
+def array(
+    n: int,
+    size: int,
+    mini: int,
+    maxi: int,
+    fh,
+    n_flag: bool = False,
+    size_flag: bool = False,
+    dis: bool = False,
+    f_flag: bool = False,
+) -> None:
     if dis and maxi - mini < size:
         print("With the given parameters generating randomness is not possible")
         print("Range of integers is less than size of array (maxi-mini < size)")
@@ -80,37 +102,49 @@ def array(n: int, size: int, mini: int, maxi: int, fh, n_flag: bool =False, size
 
     if n_flag:
         if f_flag:
-            fh.write(str(n)+"\n")
+            fh.write(str(n) + "\n")
         else:
             print(n)
 
     for i in range(n):
         if size_flag:
             if f_flag:
-                fh.write(str(size)+"\n")
+                fh.write(str(size) + "\n")
             else:
                 print(size)
 
         if dis:
             tmp = list()
             for j in range(size):
-                val = np.random.randint(mini, maxi+1)
+                val = np.random.randint(mini, maxi + 1)
                 while val in tmp:
-                    val = np.random.randint(mini, maxi+1)
+                    val = np.random.randint(mini, maxi + 1)
                 tmp.append(val)
             print_array(tmp, fh, f_flag)
         else:
             for j in range(size):
                 if f_flag:
-                    fh.write(str(np.random.randint(mini, maxi+1))+" ")
+                    fh.write(str(np.random.randint(mini, maxi + 1)) + " ")
                 else:
-                    print(np.random.randint(mini, maxi+1))
+                    print(np.random.randint(mini, maxi + 1))
         print("\n")
 
     return
 
-def matrix(n: int, r: int, c: int, mini: int, maxi: int, fh, n_flag: bool =False, nm_flag: bool =False, dis: bool =False, f_flag: bool =False) -> None:
-    if dis and maxi - mini < r*c:
+
+def matrix(
+    n: int,
+    r: int,
+    c: int,
+    mini: int,
+    maxi: int,
+    fh,
+    n_flag: bool = False,
+    nm_flag: bool = False,
+    dis: bool = False,
+    f_flag: bool = False,
+) -> None:
+    if dis and maxi - mini < r * c:
         print("With the given parameters generating randomness is not possible")
         print("Range of integers is less than the cells of array (maxi-mini < size)")
         finally_block(fh)
@@ -119,31 +153,43 @@ def matrix(n: int, r: int, c: int, mini: int, maxi: int, fh, n_flag: bool =False
 
     if n_flag:
         if f_flag:
-            fh.write(str(n)+"\n")
+            fh.write(str(n) + "\n")
         else:
             print(n)
 
     for i in range(n):
         if nm_flag:
             if f_flag:
-                fh.write(str(r)+" "+str(c)+"\n")
+                fh.write(str(r) + " " + str(c) + "\n")
             else:
                 print(r, c)
 
         if dis:
             tmp = list()
-            for j in range(r*c):
-                val = np.random.randint(mini, maxi+1)
+            for j in range(r * c):
+                val = np.random.randint(mini, maxi + 1)
                 while val in tmp:
-                    val = np.random.randint(mini, maxi+1)
+                    val = np.random.randint(mini, maxi + 1)
                 tmp.append(val)
             print_matrix(tmp, r, c, fh, f_flag)
         else:
-            print_matrix(np.random.randint(mini, maxi+1, size=r*c), r, c, fh, f_flag)
+            print_matrix(
+                np.random.randint(mini, maxi + 1, size=r * c), r, c, fh, f_flag
+            )
 
     return
 
-def string(n: int, size: int, charset: str, fh, n_flag: bool =False, size_flag: bool =False, dis: bool =False, f_flag: bool =False) -> None:
+
+def string(
+    n: int,
+    size: int,
+    charset: str,
+    fh,
+    n_flag: bool = False,
+    size_flag: bool = False,
+    dis: bool = False,
+    f_flag: bool = False,
+) -> None:
     if dis and size > len(set(charset)):
         print("With the given parameters generating randomness is not possible")
         print("Size of string > character set(distinct)")
@@ -153,18 +199,18 @@ def string(n: int, size: int, charset: str, fh, n_flag: bool =False, size_flag: 
 
     if n_flag:
         if f_flag:
-            fh.write(str(n)+"\n")
+            fh.write(str(n) + "\n")
         else:
             print(n)
 
     for i in range(n):
         if size_flag:
             if f_flag:
-                fh.write(str(size)+"\n")
+                fh.write(str(size) + "\n")
             else:
                 print(size)
 
-        rand_str = ""        
+        rand_str = ""
         if dis:
             for j in range(size):
                 ind = np.random.randint(0, len(charset))
@@ -176,14 +222,25 @@ def string(n: int, size: int, charset: str, fh, n_flag: bool =False, size_flag: 
                 ind = np.random.randint(0, len(charset))
                 rand_str = rand_str + charset[ind]
         if f_flag:
-            fh.write(rand_str+"\n")
+            fh.write(rand_str + "\n")
         else:
             print(rand_str)
 
     return
 
-def string_matrix(n: int, r: int, c: int, charset: str, fh, n_flag: bool =False, nm_flag: bool =False, dis: bool =False, f_flag: bool =False) -> None:
-    if dis and r*c > len(set(charset)):
+
+def string_matrix(
+    n: int,
+    r: int,
+    c: int,
+    charset: str,
+    fh,
+    n_flag: bool = False,
+    nm_flag: bool = False,
+    dis: bool = False,
+    f_flag: bool = False,
+) -> None:
+    if dis and r * c > len(set(charset)):
         print("With the given parameters generating randomness is not possible")
         print("Cells of array > character set(distinct)")
         finally_block(fh)
@@ -192,31 +249,32 @@ def string_matrix(n: int, r: int, c: int, charset: str, fh, n_flag: bool =False,
 
     if n_flag:
         if f_flag:
-            fh.write(str(n)+"\n")
+            fh.write(str(n) + "\n")
         else:
             print(n)
 
     for i in range(n):
         if nm_flag:
             if f_flag:
-                fh.write(str(r)+" "+str(c)+"\n")
+                fh.write(str(r) + " " + str(c) + "\n")
             else:
                 print(r, c)
 
         rand_str = ""
         if dis:
-            for j in range(r*c):
+            for j in range(r * c):
                 ind = np.random.randint(0, len(charset))
                 while charset[ind] in rand_str:
                     ind = np.random.randint(0, len(charset))
                 rand_str = rand_str + charset[ind]
         else:
-            for j in range(r*c):
+            for j in range(r * c):
                 ind = np.random.randint(0, len(charset))
                 rand_str = rand_str + charset[ind]
         print_matrix(list(rand_str), r, c, fh, f_flag)
 
     return
+
 
 def input_N() -> (int, bool):
     try:
@@ -236,6 +294,7 @@ def input_N() -> (int, bool):
 
     return (n, n_flag)
 
+
 def input_min_max() -> (int, int):
     try:
         mini = int(input("Enter Min Value: "))
@@ -249,6 +308,7 @@ def input_min_max() -> (int, int):
         maxi = 1000
 
     return (mini, maxi)
+
 
 def input_array_dimension() -> (int, int, bool):
     try:
@@ -273,6 +333,7 @@ def input_array_dimension() -> (int, int, bool):
 
     return (row, col, nm_flag)
 
+
 def input_array() -> (int, bool):
     try:
         size = int(input("Enter the size: "))
@@ -290,6 +351,7 @@ def input_array() -> (int, bool):
 
     return (size, size_flag)
 
+
 def input_charset() -> str:
     charset = input("Enter the chars without any separator: ")
     if len(charset) == 0:
@@ -297,6 +359,7 @@ def input_charset() -> str:
         charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
     return charset
+
 
 def input_distinct() -> bool:
     print("Distinct Flag\n")
@@ -309,6 +372,7 @@ def input_distinct() -> bool:
         distinct = False
 
     return distinct
+
 
 def menu() -> (int, str):
     print("# Types of Test Cases #")
@@ -326,18 +390,20 @@ def menu() -> (int, str):
         fname = input("Enter your file-name: ")
         if len(fname) == 0:
             epoch = "".join(str(time.time()).split("."))
-            fname = "test-cases-"+epoch+".txt"
+            fname = "test-cases-" + epoch + ".txt"
             print("File name set to default ->", fname)
     else:
         fname = None
 
     return opt1, fname
 
+
 def input_data1() -> (int, int, bool):
     mini, maxi = input_min_max()
     dis = input_distinct()
 
     return (mini, maxi, dis)
+
 
 def input_data2() -> (int, int, int, bool, bool):
     mini, maxi = input_min_max()
@@ -346,12 +412,14 @@ def input_data2() -> (int, int, int, bool, bool):
 
     return (size, mini, maxi, size_flag, dis)
 
+
 def input_data3() -> (int, int, int, int, bool, bool):
     mini, maxi = input_min_max()
     r, c, nm_flag = input_array_dimension()
     dis = input_distinct()
 
     return (r, c, mini, maxi, nm_flag, dis)
+
 
 def input_data4() -> (int, str, bool, bool):
     size, size_flag = input_array()
@@ -360,6 +428,7 @@ def input_data4() -> (int, str, bool, bool):
 
     return (size, charset, size_flag, dis)
 
+
 def input_data5() -> (int, int, str, bool, bool):
     r, c, nm_flag = input_array_dimension()
     charset = input_charset()
@@ -367,11 +436,13 @@ def input_data5() -> (int, int, str, bool, bool):
 
     return (r, c, charset, nm_flag, dis)
 
+
 def finally_block(fh) -> None:
     if fh != None:
         fh.close()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     opt, fname = menu()
 
     if fname != None:
