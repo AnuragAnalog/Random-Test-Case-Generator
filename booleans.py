@@ -14,18 +14,25 @@ class GenerateBooleans:
             setattr(self, key, value)
 
     def generate_random_booleans(self, num_bools):
-        if self.binarise:
-            return np.random.choice([True, False], num_bools).astype(int).tolist()
-        return np.random.choice([True, False], num_bools).tolist()
+        return np.random.choice([True, False], num_bools)
 
-    def generate_random_booleans_2d(self, num_rows, num_cols):
+    def generate_1d_test_case(self, num_bools):
+        bools = self.generate_random_booleans(num_bools)
+
+        if self.binarise:
+            return bools.astype(int).tolist()
+
+        return bools.tolist()
+
+    def generate_2d_test_case(self, num_rows, num_cols):
         if self.binarise:
             return [
-                np.random.choice([True, False], num_cols).astype(int).tolist()
+                self.generate_random_booleans(num_cols).astype(int).tolist()
                 for _ in range(num_rows)
             ]
+
         return [
-            np.random.choice([True, False], num_cols).tolist() for _ in range(num_rows)
+            self.generate_random_booleans(num_cols).tolist() for _ in range(num_rows)
         ]
 
 
@@ -40,9 +47,9 @@ def generate_booleans():
         )
         if st.button("Generate"):
             for _ in range(n):
-                st.code(gen_bool.generate_random_booleans(num_bools))
+                st.code(gen_bool.generate_1d_test_case(num_bools))
     elif option == "Random booleans in 2D Array":
         num_rows, num_cols = columize_grid(1)
         if st.button("Generate"):
             for _ in range(n):
-                st.code(gen_bool.generate_random_booleans_2d(num_rows, num_cols))
+                st.code(gen_bool.generate_2d_test_case(num_rows, num_cols))

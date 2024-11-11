@@ -1,7 +1,7 @@
 import numpy as np
 import streamlit as st
 
-from utils import float_sidebar_options
+from utils import float_sidebar_options, float_sidebar_notes
 from columize import (
     columize_range,
     columize_options,
@@ -49,12 +49,12 @@ class GenerateFloats:
         # Sort the floats if the user wants
 
         if self.sort:
-            return [
+            return sorted([
                 sorted([round(x, self.round_val) for x in row])
                 for row in np.random.uniform(
                     start, end, size=(num_rows, num_cols)
                 ).tolist()
-            ]
+            ])
         return [
             [round(x, self.round_val) for x in row]
             for row in np.random.uniform(start, end, size=(num_rows, num_cols)).tolist()
@@ -63,7 +63,11 @@ class GenerateFloats:
 
 def generate_floats():
     option, n = columize_options("floats")
+
+    # Sidebar options
     round_val = float_sidebar_options()
+
+    # Initialize the class
     gen_float = GenerateFloats(round_val=round_val)
 
     if option == "Random floats":
@@ -102,3 +106,6 @@ def generate_floats():
                         start_range, end_range, num_rows, num_cols
                     )
                 )
+
+    # Sidebar notes
+    float_sidebar_notes()

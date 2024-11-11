@@ -30,6 +30,9 @@ def float_sidebar_options():
 
     return round_val
 
+def float_sidebar_notes():
+    st.sidebar.write("When you select sort, it first sorts the floats row wise and then column wise.")
+
 
 def boolean_sidebar_options():
     binarise = st.sidebar.checkbox("Binarise the boolean values")
