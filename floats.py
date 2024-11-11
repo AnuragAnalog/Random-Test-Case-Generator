@@ -11,41 +11,52 @@ from columize import (
 
 
 class GenerateFloats:
-    def __init__(self, sort=None) -> None:
+    def __init__(self, sort=None, round_val=6) -> None:
         self.sort = sort
+        self.round_val = round_val
 
     def set_config(self, kwargs):
         for key, value in kwargs.items():
             setattr(self, key, value)
 
-    def generate_random_floats(self, min_value, max_value, round_val):
-        return round(np.random.uniform(min_value, max_value, 1)[0], round_val)
+    def generate_random_floats(self, start, end, num_floats):
+        # Generates random floats within a range and rounds them with the map and converts it to list
 
-    def generate_random_floats_range(self, start, end, num_floats, round_val):
+        return list(
+                    map(
+                        lambda x: round(x, self.round_val), np.random.uniform(start, end, num_floats)
+                    )
+                )
+
+    def generate_single_floats(self, min_value, max_value):
+        # Generates a single float within a range
+
+        return self.generate_random_floats(min_value, max_value, 1)[0]
+
+    def generate_1d_test_case(self, start, end, num_floats):
+        # Sort the floats if the user wants
+
         if self.sort:
             return sorted(
-                [
-                    round(x, round_val)
-                    for x in np.random.uniform(start, end, num_floats).tolist()
-                ]
+                self.generate_random_floats(start, end, num_floats)
             )
-        return [
-            round(x, round_val)
-            for x in np.random.uniform(start, end, num_floats).tolist()
-        ]
 
-    def generate_random_floats_2d_range(
-        self, start, end, num_rows, num_cols, round_val
+        return self.generate_random_floats(start, end, num_floats)
+
+    def generate_2d_test_case(
+        self, start, end, num_rows, num_cols
     ):
+        # Sort the floats if the user wants
+
         if self.sort:
             return [
-                sorted([round(x, round_val) for x in row])
+                sorted([round(x, self.round_val) for x in row])
                 for row in np.random.uniform(
                     start, end, size=(num_rows, num_cols)
                 ).tolist()
             ]
         return [
-            [round(x, round_val) for x in row]
+            [round(x, self.round_val) for x in row]
             for row in np.random.uniform(start, end, size=(num_rows, num_cols)).tolist()
         ]
 
@@ -53,14 +64,14 @@ class GenerateFloats:
 def generate_floats():
     option, n = columize_options("floats")
     round_val = float_sidebar_options()
-    gen_float = GenerateFloats()
+    gen_float = GenerateFloats(round_val=round_val)
 
     if option == "Random floats":
         min_value, max_value = columize_min_max(0.0, 10.0, 0.1)
         if st.button("Generate"):
             for _ in range(n):
                 st.code(
-                    gen_float.generate_random_floats(min_value, max_value, round_val)
+                    gen_float.generate_single_floats(min_value, max_value)
                 )
 
     elif option == "Random floats within a range":
@@ -74,8 +85,8 @@ def generate_floats():
         if st.button("Generate"):
             for _ in range(n):
                 st.code(
-                    gen_float.generate_random_floats_range(
-                        start_range, end_range, num_floats, round_val
+                    gen_float.generate_1d_test_case(
+                        start_range, end_range, num_floats
                     )
                 )
 
@@ -87,7 +98,7 @@ def generate_floats():
         if st.button("Generate"):
             for _ in range(n):
                 st.code(
-                    gen_float.generate_random_floats_2d_range(
-                        start_range, end_range, num_rows, num_cols, round_val
+                    gen_float.generate_2d_test_case(
+                        start_range, end_range, num_rows, num_cols
                     )
                 )
