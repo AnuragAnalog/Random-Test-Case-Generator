@@ -2,14 +2,27 @@
 
 import streamlit as st
 
+
 def char_sidebar_options():
     lower = st.sidebar.checkbox("Lowercase alphabets")
     upper = st.sidebar.checkbox("Uppercase alphabets")
     digits = st.sidebar.checkbox("Digits")
     special = st.sidebar.checkbox("Special characters")
     is_string = st.sidebar.checkbox("Generate as string")
+    custom_characters = st.sidebar.text_input("Custom Characters", value="")
+    is_panlindrome = st.sidebar.checkbox("Generate as Palindrome")
 
-    return lower, upper, digits, special, is_string
+    options = {
+        "lower": lower,
+        "upper": upper,
+        "digits": digits,
+        "special": special,
+        "is_string": is_string,
+        "custom_characters": custom_characters,
+        "is_panlindrome": is_panlindrome,
+    }
+
+    return options
 
 
 def float_sidebar_options():
